@@ -1,0 +1,13 @@
+<% layout('layouts/boilerplate') %>
+    <main class="error-page">
+        <section class="error-card" aria-labelledby="error-title">
+            <p class="error-code">
+                <%= statusCode %>
+            </p>
+            <h1 id="error-title">Something needs your attention.</h1>
+            <p class="error-message">
+                <%= message %>
+            </p>
+            <a class="button error-action" href="/listings">Return to listings</a>
+        </section>
+    </main>

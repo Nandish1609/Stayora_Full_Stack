@@ -1,0 +1,143 @@
+<% layout('../views/layouts/boilerplate.ejs') %>
+    <script>
+        const listing = <%- JSON.stringify(listing) %>
+    </script>
+    <main class="page-shell">
+        <section class="listing-detail">
+            <img class="listing-detail__image" src="<%= listing.image.url %>" alt="<%= listing.title %>" />
+            <div>
+                <p class="eyebrow">
+                    <%= listing.location %>, <%= listing.country %>
+                </p>
+                <h1 class="listing-detail__title">
+                    <%= listing.title %>
+                </h1>
+                <p class="listing-detail__description">
+                    <%= listing.description %>
+                </p>
+                <p class="listing-detail__price">
+                    &#x20B9;<%= listing.price !=null ? listing.price.toLocaleString('en-IN') : 'Price unavailable' %>
+                        <span>/ night</span>
+                </p>
+                <p class="listing-detail__location">
+                    Owned by: <i>
+                        <%= listing.owner.username %>
+                    </i>
+                </p>
+                <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
+                    <div class="detail-actions">
+                        <a class="button" href="/listings/<%= listing._id %>/edit">Edit listing</a>
+                        <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+                            <button class="button-danger" type="submit">
+                                Delete listing
+                            </button>
+                        </form>
+                    </div>
+                    <% } else { %>
+                        <div class="detail-actions">
+                            <a class="button" href="#">Book Now</a>
+
+                            <% if (currUser) { %>
+                                <% if (isFavourite) { %>
+                                    <form action="/listings/<%= listing._id %>/favourite?_method=DELETE" method="POST">
+                                        <button class="button-danger" type="submit">
+                                            Remove favourite
+                                        </button>
+                                    </form>
+                                    <% } else { %>
+                                        <form action="/listings/<%= listing._id %>/favourite" method="POST">
+                                            <button class="button save-favourite" type="submit">
+                                                Save favourite
+                                            </button>
+                                        </form>
+                                        <% } %>
+                                            <% } else { %>
+                                                <a class="button" href="/login">Log in to save</a>
+                                                <% } %>
+                        </div>
+                        <% } %>
+            </div>
+        </section>
+        <section class="reviews-section" aria-label="Guest reviews">
+            <% if(currUser) { %>
+                <div class="review-panel">
+                    <p class="eyebrow">Guest feedback</p>
+                    <h2 class="review-heading">Leave a review</h2>
+                    <form class="review-form needs-validation" action="/listings/<%= listing._id %>/reviews"
+                        method="POST" novalidation>
+                        <div class="review-field review-rating-field">
+                            <div class="review-label-row">
+                                <label for="rating">Your rating</label>
+                                <span>1–5 stars</span>
+                            </div>
+                            <fieldset class="starability-slot">
+                                <input type="radio" id="first-rate1" name="rating" value="1" checked />
+                                <label for="first-rate1" title="Terrible">1 star</label>
+                                <input type="radio" id="first-rate2" name="rating" value="2" />
+                                <label for="first-rate2" title="Not good">2 stars</label>
+                                <input type="radio" id="first-rate3" name="rating" value="3" />
+                                <label for="first-rate3" title="Average">3 stars</label>
+                                <input type="radio" id="first-rate4" name="rating" value="4" />
+                                <label for="first-rate4" title="Very good">4 stars</label>
+                                <input type="radio" id="first-rate5" name="rating" value="5" />
+                                <label for="first-rate5" title="Amazing">5 stars</label>
+                            </fieldset>
+                        </div>
+                        <div class="review-field">
+                            <label for="comment">Your experience</label>
+                            <textarea name="comment" id="comment" placeholder="What did you enjoy about this stay?"
+                                class="form-control" required></textarea>
+                            <div class="invalid-feedback">Please add a comment before submitting.</div>
+                        </div>
+                        <button class="review-submit" type="submit">Submit review</button>
+                    </form>
+                </div>
+                <% } %>
+                    <div class="reviews-list">
+                        <div class="reviews-list__heading">
+                            <div>
+                                <p class="eyebrow">From guests</p>
+                                <h2 class="review-heading">All reviews</h2>
+                            </div>
+                            <span class="review-count">
+                                <%= listing.reviews.length %>
+                                    <%= listing.reviews.length===1 ? 'review' : 'reviews' %>
+                            </span>
+                        </div>
+                        <% if (listing.reviews.length) { %>
+                            <% for (const review of listing.reviews) { %>
+                                <article class="review-card">
+                                    <!-- <p class="review-score" aria-label="Rating:  out of 5"> ★ <%= review.rating %><span> / 5</span></p> -->
+                                    <p class="starability-result review-score" data-rating="<%= review.rating %>">
+                                    </p>
+                                    <p class="review-comment">
+                                        <%= review.comment %>
+                                    </p>
+                                    <span class="review-author-span">@<i>
+                                            <%= review.author.username %>
+                                        </i></span>
+                                    <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                        method="POST" class="mt-2">
+                                        <button>Delete</button>
+                                    </form>
+                                </article>
+                                <% } %>
+                                    <% } else { %>
+                                        <p class="reviews-empty">No reviews yet. Be the first to share your stay.</p>
+                                        <% } %>
+                    </div>
+        </section>
+        <section class="location-section" aria-labelledby="location-heading">
+            <div class="location-section__heading">
+                <div>
+                    <p class="eyebrow">Location</p>
+                    <h2 id="location-heading">Where you'll be</h2>
+                    <p class="location-section__place"><i class="bi bi-geo-alt"></i>
+                        <%= listing.location %>, <%= listing.country %>
+                    </p>
+                </div>
+                <span class="location-section__pin" aria-hidden="true"><i class="bi bi-map"></i></span>
+            </div>
+            <div id="map"></div>
+        </section>
+    </main>

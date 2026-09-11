@@ -1,0 +1,39 @@
+<% layout('../views/layouts/boilerplate.ejs') %>
+    <main class="page-shell form-page">
+        <p class="eyebrow">Stayora hosting</p>
+        <h1 class="page-heading">Make it even better.</h1>
+        <p class="page-intro">
+            Update the details of <%= listing.title %> and keep your listing
+                current.
+        </p>
+        <div class="form-card">
+            <form class="listing-form needs-validation" action="/listings/<%= listing._id %>?_method=PUT" method="POST"
+                novalidate enctype="multipart/form-data">
+                <div class="field">
+                    <label for="title">Title</label><input type="text" name="title" id="title"
+                        value="<%= listing.title %>" class="form-control" required />
+                </div>
+                <div class="field">
+                    <label for="description">Description</label><textarea name="description" id="description"
+                        class="form-control" required>
+                    <%= listing.description %></textarea>
+                </div>
+                <div class="field">
+                    <label for="url">Listing Image</label><input type="file" name="url" id="url" class="form-control" />
+                </div>
+                <div class="field">
+                    <label for="price">Price per day</label><input type="number" name="price" id="price" min="0"
+                        value="<%= listing.price %>" class="form-control" required />
+                </div>
+                <div class="field">
+                    <label for="location">Location</label><input type="text" name="location" id="location"
+                        value="<%= listing.location %>" class="form-control" required />
+                </div>
+                <div class="field">
+                    <label for="country">Country</label><input type="text" name="country" id="country"
+                        value="<%= listing.country %>" class="form-control" required />
+                </div>
+                <button type="submit">Save changes</button>
+            </form>
+        </div>
+    </main>

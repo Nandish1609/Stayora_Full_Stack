@@ -1,0 +1,46 @@
+<% layout('../views/layouts/boilerplate.ejs') %>
+
+    <main class="page-shell">
+        <p class="eyebrow">Stayora hosting</p>
+        <h1 class="page-heading">Favourites</h1>
+        <% if (!(favourites.length===0)) { %>
+            <p class="page-intro">Your saved stays</p>
+            <% } %>
+                <% if (favourites.length===0) { %>
+                    <p class="page-intro">
+                        No saved stays yet. Explore listings and save places you love.
+                    </p>
+                    <a class="button browse-button" href="/listings">Browse listings</a>
+                    <% } else { %>
+                        <section class="listing-grid" aria-label="Favourite listings">
+                            <% for (const list of favourites) { %>
+                                <article class="listing-card">
+                                    <form class="card-favourite-form"
+                                        action="/listings/<%= list._id %>/favourite?_method=DELETE" method="POST">
+                                        <button class="card-favourite-button is-favourite" type="submit"
+                                            aria-label="Remove <%= list.title %> from favourites"
+                                            title="Remove from favourites">
+                                            <i class="fa-solid fa-heart" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                    <a href="/listings/<%= list._id %>" class="listing-grid-a">
+                                        <img class="listing-card__image" src="<%= list.image.url %>"
+                                            alt="<%= list.title %>" />
+                                        <div class="listing-card__content">
+                                            <h2 class="listing-card__title">
+                                                <%= list.title %>
+                                            </h2>
+                                            <p class="listing-card__description">
+                                                <%= list.description %>
+                                            </p>
+                                            <p class="listing-card__price">
+                                                ₹<%= list.price.toLocaleString('en-IN') %>
+                                                    <span>/night</span>
+                                            </p>
+                                        </div>
+                                    </a>
+                                </article>
+                                <% } %>
+                        </section>
+                        <% } %>
+    </main>

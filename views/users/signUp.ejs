@@ -1,0 +1,33 @@
+<% layout('../views/layouts/boilerplate.ejs') %>
+    <main class="page-shell form-page">
+        <p class="eyebrow">Stayora hosting</p>
+        <h1 class="page-heading">Create your account.</h1>
+        <p class="page-intro">
+            Save favourite places and make your next stay easier to plan.
+        </p>
+        <div class="form-card">
+            <form novalidate class="listing-form needs-validation" action="/signup" method="POST">
+                <div class="field">
+                    <label for="title">Email</label><input type="email" name="email" id="title"
+                        placeholder="Enter email" class="form-control" required />
+                    <div class="valid-feedback">Email Looks good!</div>
+                    <div class="invalid-feedback">Please Enter Email!</div>
+                </div>
+                <div class="field">
+                    <label for="description">Username</label><input name="username" id="description"
+                        placeholder="Enter Username" class="form-control" required />
+                    <div class="valid-feedback">Username available</div>
+                    <div class="invalid-feedback">Please Enter Username!</div>
+                </div>
+                <div class="field">
+                    <label for="url">Password</label><input type="password" name="password" id="url"
+                        placeholder="Enter Password" class="form-control" required />
+                    <div class="valid-feedback">Password looks valid!</div>
+                    <div class="invalid-feedback">
+                        Please Enter Correct Password!
+                    </div>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </main>

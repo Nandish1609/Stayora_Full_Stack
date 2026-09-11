@@ -1,0 +1,19 @@
+<% layout('../views/layouts/boilerplate.ejs') %>
+    <main class="page-shell form-page">
+        <p class="eyebrow">Stayora hosting</p>
+        <h1 class="page-heading">Welcome back.</h1>
+        <p class="page-intro">Log in to continue planning your next stay.</p>
+        <div class="form-card">
+            <form novalidate class="listing-form needs-validation" action="/login" method="POST">
+                <div class="field">
+                    <label for="description">Username</label><input name="username" id="description"
+                        placeholder="Enter Username" class="form-control" required />
+                </div>
+                <div class="field">
+                    <label for="url">Password</label><input type="password" name="password" id="url"
+                        placeholder="Enter Password" class="form-control" required />
+                </div>
+                <button type="submit">Log In</button>
+            </form>
+        </div>
+    </main>

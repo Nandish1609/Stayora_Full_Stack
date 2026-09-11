@@ -1,0 +1,52 @@
+<% layout('../views/layouts/boilerplate.ejs') %>
+
+    <main class="page-shell">
+        <p class="eyebrow">Stayora hosting</p>
+        <h1 class="page-heading">A better way to stay.</h1>
+        <p class="page-intro">
+            Discover distinctive homes and memorable places, selected for the way
+            you want to live.
+        </p>
+        <section class="listing-grid" aria-label="Available listings">
+            <% for (const list of allListing) { %>
+                <article class="listing-card">
+                    <% const isFavourite=favouriteIds.some((favouriteId)=> favouriteId.equals(list._id)); %>
+                        <% if (isFavourite) { %>
+                            <form class="card-favourite-form"
+                                action="/listings/<%= list._id %>/favourite?_method=DELETE" method="POST">
+                                <button class="card-favourite-button is-favourite" type="submit"
+                                    aria-label="Remove <%= list.title %> from favourites"
+                                    title="Remove from favourites">
+                                    <i class="fa-solid fa-heart" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                            <% } else { %>
+                                <form class="card-favourite-form" action="/listings/<%= list._id %>/favourite"
+                                    method="POST">
+                                    <button class="card-favourite-button" type="submit"
+                                        aria-label="Save <%= list.title %> to favourites" title="Save to favourites">
+                                        <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                                <% } %>
+                                    <a href="/listings/<%= list._id %>" class="listing-grid-a">
+                                        <img class="listing-card__image" src="<%= list.image.url %>"
+                                            alt="<%= list.title %>" />
+                                        <div class="listing-card__content">
+                                            <h2 class="listing-card__title">
+                                                <%= list.title %>
+                                            </h2>
+                                            <p class="listing-card__description">
+                                                <%= list.description %>
+                                            </p>
+                                            <p class="listing-card__price">&#x20B9;<%= list.price !=null ?
+                                                    list.price.toLocaleString('en-IN') : 'Price unavailable' %>
+                                                    <span>/night</span>
+                                            </p>
+                                        </div>
+                                    </a>
+                </article>
+                <% } %>
+
+        </section>
+    </main>

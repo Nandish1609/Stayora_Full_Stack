@@ -1,0 +1,19 @@
+<% if ((success && success.length) || (error && error.length)) { %>
+    <div class="flash-stack" aria-live="polite">
+        <% if (success && success.length) { %>
+            <div class="alert alert-success flash-message" role="status">
+                <span class="flash-icon" aria-hidden="true">✓</span>
+                <p>
+                    <%= success.join(' ') %></p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Dismiss notification"></button>
+            </div>
+        <% } %>
+        <% if (error && error.length) { %>
+            <div class="alert alert-danger flash-message" role="alert">
+                <span class="flash-icon" aria-hidden="true">!</span>
+                <p><%= error.join(' ') %></p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Dismiss notification"></button>
+            </div>
+        <% } %>
+    </div>
+<% } %>

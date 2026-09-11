@@ -1,0 +1,68 @@
+<% if (section==="navbar" ) { %>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/listings" class="brand" aria-label="Stayora home">
+                <span class="brand-mark" aria-hidden="true">S</span>
+                <span>Stayora</span>
+            </a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+                <span class="visually-hidden">Toggle navigation</span>
+                <i class="bi bi-list" aria-hidden="true"></i>
+            </button>
+            <div class="nav-menu" id="primary-navigation">
+                <div class="nav-links">
+                    <a href="/listings"><img src="/3dicons-explorer-dynamic-color.png" width="32" alt="">Explore</a>
+                    <a href="/favourites"><img src="/3dicons-heart-dynamic-gradient.png" width="32" alt="">Favourites</a>
+                    <a href="/listings"><img src="/3dicons-fire-front-color.png" width="32" alt="">Trending</a>
+                </div>
+                <div class="nav-links-right">
+                    <a href="/listings/new" id="host-btn">Become a host</a>
+                    <% if(!currUser) { %>
+                        <a href="/signup" aria-label="Sign up" title="Sign Up"><i class="bi bi-person-circle"></i></a>
+                        <a href="/login" aria-label="Log in" title="Log In"><i class="bi bi-door-open-fill"></i></a>
+                        <% } else { %>
+                            <a href="#" class="brand-username" aria-label="User profile" title="@<%= currUser.username %>">
+                                <span class="brand-mark-username" aria-hidden="true">
+                                    <%= currUser.username[0] %>
+                                </span>
+                            </a>
+                            <a href="/logout" aria-label="Log out" title="Log Out"><i class="bi bi-door-closed-fill"></i></a>
+                            <% } %>
+                </div>
+            </div>
+            <div class="search-bar">
+                <form class="d-flex" role="search">
+                    <input class="form-control search-input" type="search" placeholder="Search Destinations"
+                        aria-label="Search destinations" />
+                    <button class="btn btn-outline-success" type="submit" aria-label="Search" title="Search"><img src="/3dicons-zoom-front-gradient.png"
+                            width="32" alt=""></button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <% } %>
+
+        <% if (section==="footer" ) { %>
+            <footer class="site-footer">
+                <div class="footer-container">
+                    <div class="footer-brand">
+                        <a href="/listings" class="brand" aria-label="Stayora home">
+                            <span class="brand-mark" aria-hidden="true">S</span>
+                            <span>Stayora</span>
+                        </a>
+                        <p>Find a place. Make it yours.</p>
+                    </div>
+                    <nav class="footer-links" aria-label="Footer navigation">
+                        <a href="https://nandish-c.vercel.app/" target="_blank"><i class="bi bi-globe"></i></a>
+                        <a href="https://www.instagram.com/_nand_ish_16.09/" target="_blank"><i class="bi bi-instagram"></i></a>
+                        <a href="https://github.com/Nandish1609" target="_blank"><i class="bi bi-github"></i></a>
+                        <a href="https://www.linkedin.com/in/nandish-c/" target="_blank"><i class="bi bi-linkedin"></i></a>
+                    </nav>
+                </div>
+                <div class="footer-container footer-bottom">
+                    <p>Copyright &copy; <%= new Date().getFullYear() %> Stayora. All rights reserved.</p>
+                    <p>Designed &amp; Developed By Nandish C</p>
+                    <a href="/listings">India</a>
+                </div>
+            </footer>
+            <% } %>

@@ -1,0 +1,50 @@
+<% layout('../views/layouts/boilerplate.ejs') %>
+    <main class="page-shell form-page">
+        <p class="eyebrow">Stayora hosting</p>
+        <h1 class="page-heading">Share a place worth discovering.</h1>
+        <p class="page-intro">
+            Add the essentials now. You can refine the details whenever you need.
+        </p>
+        <div class="form-card">
+            <form novalidate class="listing-form needs-validation" action="/listings" method="POST"
+                enctype="multipart/form-data">
+                <div class="field">
+                    <label for="title">Title</label><input type="text" name="title" id="title" placeholder="Enter title"
+                        class="form-control" required />
+                    <div class="valid-feedback">Title Looks good!</div>
+                    <div class="invalid-feedback">Please Enter Title!</div>
+                </div>
+                <div class="field">
+                    <label for="description">Description</label><textarea name="description" id="description"
+                        placeholder="Describe your place..." class="form-control" required></textarea>
+                    <div class="valid-feedback">Description Looks good!</div>
+                    <div class="invalid-feedback">Please Enter Description!</div>
+                </div>
+                <div class="field">
+                    <label for="url">Listing Image</label><input type="file" name="url" id="url" class="form-control"
+                        required />
+                    <div class="valid-feedback">URL looks valid!</div>
+                    <div class="invalid-feedback">Please Enter Correct URL!</div>
+                </div>
+                <div class="field">
+                    <label for="price">Price per day</label><input type="number" name="price" id="price" min="0"
+                        placeholder="Enter price" class="form-control" required />
+                    <div class="valid-feedback">Price Looks good!</div>
+                    <div class="invalid-feedback">Please Enter Price!</div>
+                </div>
+                <div class="field">
+                    <label for="location">Location</label><input type="text" name="location" id="location"
+                        placeholder="Enter location" class="form-control" required />
+                    <div class="valid-feedback">Location Looks good!</div>
+                    <div class="invalid-feedback">Please Enter Location!</div>
+                </div>
+                <div class="field">
+                    <label for="country">Country</label><input type="text" name="country" id="country"
+                        placeholder="Enter country" class="form-control" required />
+                    <div class="valid-feedback">Country Looks good!</div>
+                    <div class="invalid-feedback">Please Enter Country!</div>
+                </div>
+                <button type="submit">Create listing</button>
+            </form>
+        </div>
+    </main>
