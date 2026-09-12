@@ -18,15 +18,15 @@
                 <div class="nav-links-right">
                     <a href="/listings/new" id="host-btn">Become a host</a>
                     <% if(!currUser) { %>
-                        <a href="/signup" aria-label="Sign up" title="Sign Up"><i class="bi bi-person-circle"></i></a>
-                        <a href="/login" aria-label="Log in" title="Log In"><i class="bi bi-door-open-fill"></i></a>
+                        <a href="/signup" aria-label="Sign up" title="Sign Up"><i class="bi bi-person-circle"></i>&nbsp;Signup</a>
+                        <a href="/login" aria-label="Log in" title="Log In"><i class="bi bi-door-open-fill"></i>&nbsp;Login</a>
                         <% } else { %>
                             <a href="#" class="brand-username" aria-label="User profile" title="@<%= currUser.username %>">
                                 <span class="brand-mark-username" aria-hidden="true">
                                     <%= currUser.username[0] %>
                                 </span>
                             </a>
-                            <a href="/logout" aria-label="Log out" title="Log Out"><i class="bi bi-door-closed-fill"></i></a>
+                            <a href="/logout" aria-label="Log out" title="Log Out"><i class="bi bi-door-closed-fill"></i>&nbsp;Logout</a>
                             <% } %>
                 </div>
             </div>

@@ -9,7 +9,7 @@
   "author": "Nandish C",
   "type": "commonjs",
   "main": "server.js",
-  "scripts": {
+    "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
     "test": "echo \"No automated tests are configured yet.\""
